@@ -1,0 +1,2 @@
+Match (n)-[r:SENTIMENT_TO]->(m)
+Return n,r,m

@@ -1,0 +1,24 @@
+#org.springframework.data.rest.level=DEBUG
+
+logging:
+  level:
+    com.nickom: DEBUG
+
+spring:
+  application:
+    name: reporting
+  profiles:
+    active: dev
+  data:
+    neo4j:
+      uri: bolt://localhost
+      username: neo4j
+      password: admin
+
+---
+
+spring:
+  profiles: dev
+
+server:
+  port: 8081
