@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public interface PersonValidator {
 
-    void ensurePersonAndTenant(UUID businessId, Optional<Person> optionalPerson);
+  void ensurePersonAndTenant(UUID businessId, Optional<Person> optionalPerson);
 
-    void ensureSelfAndSubordinate(UUID id, Collection<UUID> subordinateIds);
+  void ensureSelfAndSubordinate(UUID id, Collection<UUID> subordinateIds);
 
-    void ensureManagerAndSubordinate(Collection<UUID> managerIds, Collection<UUID> subordinateIds);
+  void ensureManagerAndSubordinate(Collection<UUID> managerIds, Collection<UUID> subordinateIds);
 }

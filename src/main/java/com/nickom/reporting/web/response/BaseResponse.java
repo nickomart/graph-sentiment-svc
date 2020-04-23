@@ -4,31 +4,31 @@ import java.util.UUID;
 
 public class BaseResponse {
 
-    private UUID id;
+  private UUID id;
 
-    private String timestamp;
+  private String timestamp;
 
-    public BaseResponse() {
-    }
+  public BaseResponse() {
+  }
 
-    public BaseResponse(UUID id, String timestamp) {
-        this.id = id;
-        this.timestamp = timestamp;
-    }
+  public BaseResponse(UUID id, String timestamp) {
+    this.id = id;
+    this.timestamp = timestamp;
+  }
 
-    public UUID getId() {
-        return id;
-    }
+  public UUID getId() {
+    return id;
+  }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+  public void setId(UUID id) {
+    this.id = id;
+  }
 
-    public String getTimestamp() {
-        return timestamp;
-    }
+  public String getTimestamp() {
+    return timestamp;
+  }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
+  public void setTimestamp(String timestamp) {
+    this.timestamp = timestamp;
+  }
 }

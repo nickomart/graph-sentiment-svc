@@ -1,2 +1,6 @@
 Match (n)-[r:SENTIMENT_TO]->(m)
 Return n,r,m
+
+## Get sentiment
+MATCH p=()-[r:SENTIMENT_TO]->() RETURN p LIMIT 25
+MATCH p=()-[:REPORTING_TO|:SUPERVISING]->() RETURN p LIMIT 25

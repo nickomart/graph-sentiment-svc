@@ -11,27 +11,28 @@ import java.util.UUID;
 
 @Component
 public class PersonValidatorImpl implements PersonValidator {
-    @Override
-    public void ensurePersonAndTenant(UUID businessId, Optional<Person> optionalPerson) {
-        if (!optionalPerson.isPresent() || !businessId.equals(optionalPerson.get().getBusinessId())) {
-            throw new RuntimeException("report.person.not.found");
-        }
+  @Override
+  public void ensurePersonAndTenant(UUID businessId, Optional<Person> optionalPerson) {
+    if (!optionalPerson.isPresent() || !businessId.equals(optionalPerson.get().getBusinessId())) {
+      throw new RuntimeException("report.person.not.found");
     }
+  }
 
-    @Override
-    public void ensureSelfAndSubordinate(UUID id, Collection<UUID> subordinateIds) {
-        if (CollectionUtils.isEmpty(subordinateIds)) {
-            throw new IllegalArgumentException("report.subordinate.cannot.be.empty");
-        }
-        if (subordinateIds.contains(id)) {
-            throw new IllegalArgumentException("report.subordinate.cannot.be.self");
-        }
+  @Override
+  public void ensureSelfAndSubordinate(UUID id, Collection<UUID> subordinateIds) {
+    if (CollectionUtils.isEmpty(subordinateIds)) {
+      throw new IllegalArgumentException("report.subordinate.cannot.be.empty");
     }
+    if (subordinateIds.contains(id)) {
+      throw new IllegalArgumentException("report.subordinate.cannot.be.self");
+    }
+  }
 
-    @Override
-    public void ensureManagerAndSubordinate(Collection<UUID> managerIds, Collection<UUID> subordinateIds) {
-        if (CollectionUtils.containsAny(managerIds, subordinateIds)) {
-            throw new IllegalArgumentException("report.subordinate.cannot.be.manager");
-        }
+  @Override
+  public void ensureManagerAndSubordinate(Collection<UUID> managerIds,
+                                          Collection<UUID> subordinateIds) {
+    if (CollectionUtils.containsAny(managerIds, subordinateIds)) {
+      throw new IllegalArgumentException("report.subordinate.cannot.be.manager");
     }
+  }
 }

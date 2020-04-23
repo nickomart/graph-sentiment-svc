@@ -6,14 +6,14 @@ import java.util.UUID;
 
 public class ManagePersonRequest {
 
-    @NotNull
-    private Set<UUID> subordinateIds;
+  @NotNull
+  private Set<UUID> subordinateIds;
 
-    public Set<UUID> getSubordinateIds() {
-        return subordinateIds;
-    }
+  public Set<UUID> getSubordinateIds() {
+    return subordinateIds;
+  }
 
-    public void setSubordinateIds(Set<UUID> subordinateIds) {
-        this.subordinateIds = subordinateIds;
-    }
+  public void setSubordinateIds(Set<UUID> subordinateIds) {
+    this.subordinateIds = subordinateIds;
+  }
 }
