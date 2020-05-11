@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("Mock")
 public class MockNlpSentimentDaoInpl implements NlpSentimentDao {
   @Override
   public MeasurableSentiment processText(String text) {

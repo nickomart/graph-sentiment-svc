@@ -16,6 +16,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -33,7 +34,7 @@ public class PersonSentimentServiceImpl implements SentimentService {
   @Autowired
   public PersonSentimentServiceImpl(PersonRepository personRepository,
                                     PersonValidator personValidator,
-                                    NlpSentimentDao nlpSentimentDao) {
+                                    @Qualifier("GcpNlp") NlpSentimentDao nlpSentimentDao) {
     this.personRepository = personRepository;
     this.personValidator = personValidator;
     this.nlpSentimentDao = nlpSentimentDao;
