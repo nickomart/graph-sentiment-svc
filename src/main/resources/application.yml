@@ -1,23 +1,32 @@
 logging:
   level:
-    com.nickom: DEBUG
+    com.nickom: INFO
 
 spring:
   application:
-    name: reporting
+    name: reporting-service
   profiles:
     active: dev
   data:
     neo4j:
       # replace this with your local/dev credentials
-      uri: bolt://localhost
+      uri: bolt://${NEO4J_HOST:localhost}
       username: neo4j
       password: admin
+
+server:
+  port: 8081
+
+gcp:
+  account:
+    # Replace this with your GCP service account json path
+    credential: '/gcp/your_account_service.json'
 
 ---
 
 spring:
   profiles: dev
 
-server:
-  port: 8081
+logging:
+  level:
+    com.nickom: DEBUG

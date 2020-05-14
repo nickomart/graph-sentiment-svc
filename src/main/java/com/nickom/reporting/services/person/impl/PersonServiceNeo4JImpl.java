@@ -56,6 +56,7 @@ public class PersonServiceNeo4JImpl implements PersonService {
         person.getManagers().stream().map(p -> p.getId()).collect(Collectors.toList()),
         subordinateIds
     );
+    person.getSubordinates().clear();
     for (Person subordinate : personRepository.findAllById(subordinateIds)) {
       person.manage(subordinate);
     }

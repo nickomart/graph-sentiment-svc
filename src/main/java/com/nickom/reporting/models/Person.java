@@ -44,11 +44,11 @@ public class Person {
     this(null, businessId, name, email);
   }
 
-  @JsonIgnoreProperties({"managers", "subordinates"})
+  @JsonIgnoreProperties({"managers", "subordinates", "sentiments"})
   @Relationship(type = "REPORTING_TO")
   private List<Person> managers = new ArrayList<>();
 
-  @JsonIgnoreProperties({"managers", "subordinates"})
+  @JsonIgnoreProperties({"managers", "subordinates", "sentiments"})
   @Relationship(type = "SUPERVISING")
   private List<Person> subordinates = new ArrayList<>();
 

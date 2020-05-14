@@ -60,26 +60,30 @@ public class PersonSentimentServiceImpl implements SentimentService {
         author,
         subject
     );
+    logger.info("newSentiment: {}", ToStringBuilder.reflectionToString(newSentiment));
     SentimentAnalysis currentSentiment = CollectionUtils.isEmpty(author.getSentiments()) ? null :
         author.getSentiments()
             .stream()
             .filter(s -> s.getSubject().equals(newSentiment.getSubject()) &&
                 s.getBusinessId().equals(newSentiment.getBusinessId()))
             .findFirst().orElse(null);
-    if (CollectionUtils.isEmpty(author.getSentiments())) {
-      author.setSentiments(Arrays.asList(newSentiment));
+    if (currentSentiment == null) {
+      if (CollectionUtils.isEmpty(author.getSentiments())) {
+        author.setSentiments(Arrays.asList(newSentiment));
+      } else {
+        author.getSentiments().add(newSentiment);
+      }
     } else {
       aggregateSentiment(currentSentiment, newSentiment);
+      logger.info("currentSentiment: {}", ToStringBuilder.reflectionToString(currentSentiment));
     }
-    logger.info("newSentiment: {}", ToStringBuilder.reflectionToString(newSentiment));
-    logger.info("currentSentiment: {}", ToStringBuilder.reflectionToString(currentSentiment));
     return personRepository.save(author);
   }
 
   @Override
   public void aggregateSentiment(SentimentAnalysis currentSentiment,
                                  SentimentAnalysis newSentiment) {
-    if (currentSentiment == null) {
+    if (currentSentiment == null || newSentiment == null) {
       return;
     }
     int totalFeedback = currentSentiment.getTotalFeedback() + newSentiment.getTotalFeedback();

@@ -4,9 +4,13 @@ plugins {
 	id 'java'
 }
 
-group = 'com.nickomm'
+group = 'com.nickom'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+jar {
+	archiveName = 'reporting-service.jar'
+}
 
 repositories {
 	mavenCentral()
@@ -27,6 +31,7 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-validation')
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation 'com.google.cloud:google-cloud-language:1.100.0'
+	implementation 'com.google.cloud:google-cloud-storage:1.108.0'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}

@@ -1,5 +1,6 @@
 package com.nickom.reporting.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.nickom.reporting.common.UUIDConverter;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -27,9 +28,11 @@ public class SentimentAnalysis {
 
   private Set<String> categories;
 
+  @JsonIgnoreProperties({"managers", "subordinates", "sentiments"})
   @StartNode
   private Person author;
 
+  @JsonIgnoreProperties({"managers", "subordinates", "sentiments"})
   @EndNode
   private Person subject;
 
