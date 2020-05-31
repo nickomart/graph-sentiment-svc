@@ -8,11 +8,15 @@ spring:
   profiles:
     active: dev
   data:
+    # replace this with your local/dev credentials
     neo4j:
-      # replace this with your local/dev credentials
       uri: bolt://${NEO4J_HOST:localhost}
       username: neo4j
       password: admin
+    mongo:
+      port: 27017
+      host: ${MONGO_HOST:localhost}
+      uri: mongodb://${MONGO_HOST:localhost}/report
 
 server:
   port: 8081
@@ -20,7 +24,7 @@ server:
 gcp:
   account:
     # Replace this with your GCP service account json path
-    credential: '/gcp/your_account_service.json'
+    credential: '/gcp/NLP-Sentiment-12227a53e87a.json'
 
 ---
 

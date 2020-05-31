@@ -7,8 +7,13 @@ services:
       - '7473:7473'
       - '7687:7687'
 
+  mongodb:
+    image: mongo:3.2.4
+    ports:
+      - 27017:27017
+
   reporting-service:
     image: nickom/reporting-service:latest
     restart: always
     ports:
-    - 8081:8081
+      - 8081:8081

@@ -4,3 +4,12 @@ Return n,r,m
 ## Get sentiment
 MATCH p=()-[r:SENTIMENT_TO]->() RETURN p LIMIT 25
 MATCH p=()-[:REPORTING_TO|:SUPERVISING]->() RETURN p LIMIT 25
+
+## Business id where
+MATCH (n)
+WHERE n.businessId = ''
+RETURN n
+
+## sentiment and goal belong to
+Match a=()-[r:SENTIMENT_TO]->(),b=()-[r2:BELONG_TO]->()
+Return a,b

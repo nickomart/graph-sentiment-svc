@@ -27,6 +27,7 @@ public class Person {
 
   private String name;
 
+  @Index
   @Convert(value = UUIDConverter.class)
   private UUID businessId;
 
@@ -54,7 +55,7 @@ public class Person {
 
   @JsonIgnoreProperties({"author"})
   @Relationship(type = "SENTIMENT_TO")
-  private List<SentimentAnalysis> sentiments;
+  private List<AbstractSentimentAnalysis> sentiments;
 
   public void manage(Person person) {
     subordinates.add(person);
@@ -85,11 +86,11 @@ public class Person {
     return subordinates;
   }
 
-  public List<SentimentAnalysis> getSentiments() {
+  public List<AbstractSentimentAnalysis> getSentiments() {
     return sentiments;
   }
 
-  public void setSentiments(List<SentimentAnalysis> sentiments) {
+  public void setSentiments(List<AbstractSentimentAnalysis> sentiments) {
     this.sentiments = sentiments;
   }
 }

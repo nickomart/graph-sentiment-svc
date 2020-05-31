@@ -1,9 +1,12 @@
 package com.nickom.reporting.small.services;
 
+import com.nickom.reporting.models.AbstractSentimentAnalysis;
 import com.nickom.reporting.models.Person;
 import com.nickom.reporting.models.SentimentAnalysis;
 import com.nickom.reporting.models.nlp.MeasurableSentiment;
+import com.nickom.reporting.repositories.EntityRepository;
 import com.nickom.reporting.repositories.PersonRepository;
+import com.nickom.reporting.repositories.SentimentRepository;
 import com.nickom.reporting.services.sentiment.SentimentService;
 import com.nickom.reporting.services.sentiment.impl.PersonSentimentServiceImpl;
 import com.nickom.reporting.services.validation.PersonValidator;
@@ -30,6 +33,12 @@ public class SentimentServiceTest {
   private PersonRepository personRepository;
 
   @Mock
+  private EntityRepository entityRepository;
+
+  @Mock
+  private SentimentRepository sentimentRepository;
+
+  @Mock
   private NlpSentimentDao nlpSentimentDao;
 
   private PersonValidator personValidator;
@@ -38,7 +47,9 @@ public class SentimentServiceTest {
   public void setup() {
     MockitoAnnotations.initMocks(this);
     personValidator = new PersonValidatorImpl();
-    sentimentService = new PersonSentimentServiceImpl(personRepository, personValidator, nlpSentimentDao);
+    sentimentService =
+        new PersonSentimentServiceImpl(personRepository, entityRepository, sentimentRepository,
+            personValidator, nlpSentimentDao);
   }
 
   @AfterEach
@@ -97,8 +108,10 @@ public class SentimentServiceTest {
     Mockito.verify(personRepository, Mockito.times(1)).save(argumentCaptor.capture());
     Person person = argumentCaptor.getValue();
     Assertions.assertEquals(1, person.getSentiments().size());
-    SentimentAnalysis sentimentAnalysis = person.getSentiments().get(0);
-    Assertions.assertEquals(1, sentimentAnalysis.getTotalFeedback());
+    AbstractSentimentAnalysis abstractSentimentAnalysis = person.getSentiments().get(0);
+    Assertions.assertEquals(1, abstractSentimentAnalysis.getTotalFeedback());
+    Assertions.assertTrue(abstractSentimentAnalysis instanceof SentimentAnalysis);
+    SentimentAnalysis sentimentAnalysis = SentimentAnalysis.class.cast(abstractSentimentAnalysis);
     Assertions.assertEquals(subject, sentimentAnalysis.getSubject());
     Assertions.assertEquals(author, sentimentAnalysis.getAuthor());
 

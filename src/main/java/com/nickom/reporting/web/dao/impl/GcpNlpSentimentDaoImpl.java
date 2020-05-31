@@ -76,5 +76,10 @@ public class GcpNlpSentimentDaoImpl implements NlpSentimentDao {
     public String getCategory() {
       return classifyTextResponse.getCategoriesList().toString();
     }
+
+    @Override
+    public float getMagnitude() {
+      return sentiment.getMagnitude();
+    }
   }
 }

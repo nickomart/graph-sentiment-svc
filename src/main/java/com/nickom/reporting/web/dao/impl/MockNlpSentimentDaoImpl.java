@@ -25,15 +25,20 @@ public class MockNlpSentimentDaoImpl implements NlpSentimentDao {
         "Fear"
     ));
 
-    float score;
+    private final float score;
 
-    String category;
+    private final String category;
+
+    private final float magnitude;
+
 
     public MockMeasurableSentiment() {
       float coin = RandomUtils.nextInt(0, 2) > 0 ? 1 : -1;
       float randomScore = RandomUtils.nextInt(0, 11);
+      float randomMag = RandomUtils.nextInt(0, 21);
       score = (coin * randomScore) / 10;
       category = CATEGORIES.get(RandomUtils.nextInt(0, CATEGORIES.size()));
+      magnitude = randomMag / 10;
     }
 
     @Override
@@ -44,6 +49,11 @@ public class MockNlpSentimentDaoImpl implements NlpSentimentDao {
     @Override
     public String getCategory() {
       return category;
+    }
+
+    @Override
+    public float getMagnitude() {
+      return magnitude;
     }
   }
 }

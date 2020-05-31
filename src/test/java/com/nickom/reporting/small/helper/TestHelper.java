@@ -20,6 +20,7 @@ public class TestHelper {
 
   public static SentimentAnalysis createSentimentAnalysis(Person author, Person subject) {
     return new SentimentAnalysis(UUID.randomUUID(), 0.5f, 1,
-        new LinkedHashSet<>(Arrays.asList("Praise")), author, subject);
+        new LinkedHashSet<>(Arrays.asList("Praise")),
+        new LinkedHashSet<>(Arrays.asList(UUID.randomUUID().toString())), author, subject);
   }
 }

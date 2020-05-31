@@ -58,6 +58,7 @@ public class PersonServiceNeo4JImpl implements PersonService {
     );
     person.getSubordinates().clear();
     for (Person subordinate : personRepository.findAllById(subordinateIds)) {
+      personValidator.ensurePersonAndTenant(businessId, Optional.of(subordinate));
       person.manage(subordinate);
     }
     return personRepository.save(person);

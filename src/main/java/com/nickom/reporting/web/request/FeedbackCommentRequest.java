@@ -4,9 +4,13 @@ import java.util.UUID;
 
 public class FeedbackCommentRequest {
 
+  private UUID id;
+
   private UUID author;
 
   private UUID subject;
+
+  private BaseEntityRequest entity;
 
   private String text;
 
@@ -34,4 +38,19 @@ public class FeedbackCommentRequest {
     this.text = text;
   }
 
+  public BaseEntityRequest getEntity() {
+    return entity;
+  }
+
+  public void setEntity(BaseEntityRequest entity) {
+    this.entity = entity;
+  }
+
+  public UUID getId() {
+    return id;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
+  }
 }

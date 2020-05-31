@@ -93,6 +93,20 @@ curl --location --request POST 'localhost:8081/report/v1/sentiments' \
     "text": "I’m his boss actually. And I treat him well. I’m taking him out to lunch cause I can afford it and he can have whatever he wants."
 }'
 ```
+#### request to entity
+```
+curl --location --request POST 'localhost:8081/report/v1/sentiments' \
+--header 'x-tenant: 98c2e7dc-b2c7-49d9-8cbb-93501a00220f' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+    "author": "0fa7cc74-2808-4d61-ae6b-63acbcb38474",
+    "subject": {
+    	"id": "4ba7cc74-2808-4d61-ae6b-63acbcb38474",
+    	"type": "Car"
+    },
+    "text": "Minivans have always had the stigma of the soccer mom image even though they’re incredibly practical"
+}'
+```
 #### response
 ```
 {
@@ -114,7 +128,7 @@ curl --location --request POST 'localhost:8081/report/v1/sentiments' \
             "id": 13,
             "businessId": "98c2e7dc-b2c7-49d9-8cbb-93501a00220f",
             "quantifiedScore": 0.4,
-            "totalFeedback": 2,
+            "totalFeedback": 1,
             "categories": [
                 "[]"
             ],
@@ -137,6 +151,47 @@ curl --location --request POST 'localhost:8081/report/v1/sentiments' \
         }
     ]
 }
+```
+
+## Creating entity
+### request
+```
+curl --location --request POST 'localhost:8081/report/v1/entity' \
+--header 'x-tenant: 98c2e7dc-b2c7-49d9-8cbb-93501a00220f' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+	"id": "4ba7cc74-2808-4d61-ae6b-63acbcb38474",
+	"type": "Car",
+	"name": "Mini Van",
+	"ownerIds": ["5d3444c4-3798-4619-b644-9b2da1dd6bfa"]
+}'
+```
+
+## Fetching sentiment data
+### request
+```
+curl --location --request GET 'localhost:8081/report/v1/sentiments/0fa7cc74-2808-4d61-ae6b-63acbcb38474/to/5d3444c4-3798-4619-b644-9b2da1dd6bfa' \
+--header 'x-tenant: 98c2e7dc-b2c7-49d9-8cbb-93501a00220f'
+```
+optional requestParam `entityType` to fetch sentiment to entity.
+### response
+```
+[    
+    {
+        "id": "ceaea51f-c1c9-4665-b0e1-f66a2ac99a7e",
+        "businessId": "98c2e7dc-b2c7-49d9-8cbb-93501a00220f",
+        "text": "Well, am I wrong? They say it's not different but it's a different sensation. When you use, something, to block I think everyone knows what I'm talking about. It's not necessarily different for the woman. But it is different for me",
+        "score": -0.2,
+        "magnitude": 1.3
+    },
+    {
+        "id": "085785bd-b19c-43a9-8cb3-b5e3e4d6f18e",
+        "businessId": "98c2e7dc-b2c7-49d9-8cbb-93501a00220f",
+        "text": "I’m his boss actually. sadsadasds And I treat him well. I’m taking him out to lunch cause I can afford it and he can have whatever he wants.",
+        "score": 0.5,
+        "magnitude": 1.4
+    }
+]
 ```
 
 ## GCP service account

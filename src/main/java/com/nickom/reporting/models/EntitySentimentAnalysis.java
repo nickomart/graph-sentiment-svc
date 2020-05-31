@@ -11,43 +11,42 @@ import org.neo4j.ogm.annotation.RelationshipEntity;
 import org.neo4j.ogm.annotation.StartNode;
 
 @RelationshipEntity(type = "SENTIMENT_TO")
-public class SentimentAnalysis extends AbstractSentimentAnalysis {
-
+public class EntitySentimentAnalysis extends AbstractSentimentAnalysis {
   @JsonIgnoreProperties({"managers", "subordinates", "sentiments"})
   @StartNode
   private Person author;
 
-  @JsonIgnoreProperties({"managers", "subordinates", "sentiments"})
   @EndNode
-  private Person subject;
+  private Entity entity;
 
-
-  public SentimentAnalysis() {
+  public EntitySentimentAnalysis() {
     super(null, 0f, 0, new LinkedHashSet<>(), new LinkedHashSet<>());
   }
 
-  public SentimentAnalysis(UUID businessId, float quantifiedScore, int totalFeedback,
-                           Set<String> categories, Set<String> sentimentData, Person author, Person subject) {
+  public EntitySentimentAnalysis(UUID businessId, float quantifiedScore, int totalFeedback,
+                                 Set<String> categories, Set<String> sentimentData, Person author, Entity entity) {
     super(businessId, quantifiedScore, totalFeedback, categories, sentimentData);
     this.author = author;
-    this.subject = subject;
+    this.entity = entity;
   }
 
   public Person getAuthor() {
     return author;
   }
 
-  public Person getSubject() {
-    return subject;
+  public Entity getEntity() {
+    return entity;
   }
 
   @Override
   public boolean canBeMerged(AbstractSentimentAnalysis abstractSentimentAnalysis) {
-    if (abstractSentimentAnalysis instanceof SentimentAnalysis) {
-      SentimentAnalysis sentimentAnalysis = SentimentAnalysis.class.cast(abstractSentimentAnalysis);
-      return getBusinessId().equals(sentimentAnalysis.getBusinessId()) && getSubject().getId().equals(sentimentAnalysis.getSubject().getId());
+    if (abstractSentimentAnalysis instanceof EntitySentimentAnalysis) {
+      EntitySentimentAnalysis entitySentimentAnalysis =
+          EntitySentimentAnalysis.class.cast(abstractSentimentAnalysis);
+      return getBusinessId().equals(entitySentimentAnalysis.getBusinessId()) &&
+          getEntity().getId().equals(entitySentimentAnalysis.getEntity().getId()) &&
+          getEntity().getType().equals(entitySentimentAnalysis.getEntity().getType());
     }
     return false;
   }
 }
-
