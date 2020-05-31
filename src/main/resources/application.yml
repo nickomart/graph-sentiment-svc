@@ -14,8 +14,6 @@ spring:
       username: neo4j
       password: admin
     mongo:
-      port: 27017
-      host: ${MONGO_HOST:localhost}
       uri: mongodb://${MONGO_HOST:localhost}/report
 
 server:
