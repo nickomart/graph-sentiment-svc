@@ -13,8 +13,8 @@ spring:
       uri: bolt://${NEO4J_HOST:localhost}
       username: neo4j
       password: admin
-    mongo:
-      uri: mongodb://${MONGO_HOST:localhost}/report
+    mongodb:
+      uri: mongodb://${MONGO_HOST:localhost}:27017/reporting
 
 server:
   port: 8081
