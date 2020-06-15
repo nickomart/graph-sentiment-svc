@@ -35,7 +35,7 @@ public class GcpNlpSentimentDaoImpl implements NlpSentimentDao {
           LanguageServiceSettings.newBuilder()
               .setCredentialsProvider(FixedCredentialsProvider.create(config.createCredential()))
               .build();
-    } catch (IOException e) {
+    } catch (Exception e) {
       LOGGER.error("Cannot instantiate GCP credential", e);
     }
   }
